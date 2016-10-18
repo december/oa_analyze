@@ -1,6 +1,15 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import csv
+import datetime
+import time
+
+def isGood(c, g):
+	if len(c) <= 10:
+		return False
+	if max(c) <= 100 and max(g) <= 100:
+		return False
+	return True
 
 def mycmp(x, y):
 	if x[4] < y[4]:
@@ -13,9 +22,12 @@ def mycmp(x, y):
 	return 1
 
 def delta(begin, now):
+	b = datetime.datetime.strptime(begin, '%Y%m%d')
+	n = datetime.datetime.strptime(now, '%Y%m%d')
+	d = n - b
+	return d.days
 
-
-csvfile = file('../../Data/Wechat_OA/10059_20160101_mod1k.csv', 'r')
+csvfile = file('../10059_20160101_mod10w.csv', 'r')
 reader = csv.reader(csvfile)
 comelist = list()
 namelist = list()
@@ -27,15 +39,18 @@ lasttime = ''
 temp = list()
 first = True
 data = list()
+total = 0
+bad = 0
 
 for line in reader:
 	data.append(line)
-data.sort(mycmp)
+data.sort(cmp=mycmp)
 print 'Finshed sorting.'
 
-orderfile = open('../../Data/Wechat_OA/ordered_10059', 'wb')
+orderfile = open('../ordered_10059.csv', 'wb')
 for line in data:
-	orderfile.write(line)
+	for item in line:
+		orderfile.write(item+' ')
 	orderfile.write('\n')
 orderfile.close()
 
@@ -74,15 +89,13 @@ for line in data:
 		if line[0] != lasttime:
 			tempcome.append(come)
 			tempgo.append(go)
-			come = 0
-			go = 0
 			lasttime = line[0]
 			d = delta(time, line[0])
 			n = len(temptime) - 1
 			while temptime[n] < d - 1:
 				temptime.append(temptime[n]+1)
-				tempcome.append(0)
-				tempgo.append(0)
+				tempcome.append(come)
+				tempgo.append(go)
 				n += 1
 			temptime.append(d)
 			if int(line[13]) == 1:
@@ -104,11 +117,11 @@ for i in range(n):
 	x = np.array(comelist[i])
 	y = np.array(golist[i])
 	z = np.array(timelist[i])
-	plt.plot(x, z, 'ob')
-	plt.plot(y, z, 'or')
+	plt.plot(z, x, 'ob')
+	plt.plot(z, y, 'or')
 	plt.title(unicode(timestring[i], 'utf-8'))
 	plt.xlabel(u'Time')
 	plt.ylabel(u'Number')
-	plt.savefig('../../Data/Wechat_OA/doubleline/'+str(i)+'_'+namelist[i]+'.png')
+	plt.savefig('../doubleline/'+str(i)+'_'+namelist[i]+'.png')
 	plt.cla()
 

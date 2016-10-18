@@ -38,12 +38,13 @@ bad = 0
 data = list()
 for line in reader:
 	data.append(line)
-data.sort(mycmp)
+data.sort(cmp=mycmp)
 print 'Finished sorting.'
 
 orderfile = open('../../Data/Wechat_OA/ordered_11017', 'wb')
 for line in data:
-	orderfile.write(line)
+	for item in line:
+		orderfile.write(item+' ')
 	orderfile.write('\n')
 orderfile.close()
 
