@@ -27,7 +27,7 @@ def delta(begin, now):
 	d = n - b
 	return d.days
 
-csvfile = file('../10059_20160101_mod10w.csv', 'r')
+csvfile = file('../../rawdata/Wechat_OA/10059_20160101_mod1k.csv', 'r')
 reader = csv.reader(csvfile)
 comelist = list()
 namelist = list()

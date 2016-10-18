@@ -41,7 +41,7 @@ for line in reader:
 data.sort(cmp=mycmp)
 print 'Finished sorting.'
 
-orderfile = open('../../Data/Wechat_OA/ordered_11017', 'wb')
+orderfile = open('../../rawdata/Wechat_OA/ordered_11017', 'wb')
 for line in data:
 	for item in line:
 		orderfile.write(item+' ')
@@ -88,7 +88,7 @@ for line in data:
 n = len(namelist)
 print '!'+str(n)
 
-idfile = open('../../Data/Wechat_OA/idlist', 'wb')
+idfile = open('../idlist', 'wb')
 for i in range(n):
 	idfile.write(namelist[i][0])
 	idfile.write(' ')
@@ -109,7 +109,7 @@ for i in range(n):
 	plt.title(unicode(timelist[i], 'utf-8'))
 	plt.xlabel(u'Time')
 	plt.ylabel(u'FansNum')
-	plt.savefig('../../Data/Wechat_OA/fansnum/'+str(i)+'_'+namelist[i][1]+'.png')
+	plt.savefig('../fansnum/'+str(i)+'_'+namelist[i][1]+'.png')
 	plt.cla()
 
 print 'Finished.('+str(total)+' items in total, '+str(total-bad)+' good ones.)'
