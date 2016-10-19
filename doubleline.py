@@ -54,6 +54,15 @@ for line in data:
 	orderfile.write('\n')
 orderfile.close()
 
+csvfile = file('../intialnum.csv', 'r')
+reader = csv.reader(csvfile)
+initiallist = list()
+for line in reader:
+	initiallist.append(line)
+
+begin = 0
+initsize = len(initiallist)
+
 for line in data:
 	if line[0][0] != '2':
 		print line[0][0]
@@ -80,6 +89,14 @@ for line in data:
 		temptime = list()
 		temptime.append(0)
 		come = 0
+		while begin < initsize:
+			if initiallist[begin][0] == lastid:
+				come = int(initiallist[begin][1])
+				break
+			if initiallist[begin][0] > lastid:
+				break
+			begin += 1
+		come = getNum(lastid, begin)
 		go = 0
 		if int(line[13]) == 1:
 			come += 1
@@ -122,6 +139,6 @@ for i in range(n):
 	plt.title(unicode(timestring[i], 'utf-8'))
 	plt.xlabel(u'Time')
 	plt.ylabel(u'Number')
-	plt.savefig('../doubleline/'+str(i)+'_'+namelist[i]+'.png')
+	plt.savefig('../doubleline_init/'+str(i)+'_'+namelist[i]+'.png')
 	plt.cla()
 
