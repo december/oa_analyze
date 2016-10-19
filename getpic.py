@@ -21,7 +21,7 @@ def mycmp(x, y):
 			return 0
 	return 1
 
-csvfile = file('../../Data/Wechat_OA/11017_20160101_mod1k.csv', 'r')
+csvfile = file('../../rawdata/Wechat_OA/11017_20160101_mod1k.csv', 'r')
 reader = csv.reader(csvfile)
 fanslist = list()
 namelist = list()
@@ -55,7 +55,7 @@ for line in data:
 	if line[13] != lastid:
 		if not first:
 			if isGood(temp):
-				name.replace('/', '|')
+				name = name.replace('/', '|')
 				t = list()
 				t.append(uin)
 				t.append(name+flag)
@@ -109,7 +109,7 @@ for i in range(n):
 	plt.title(unicode(timelist[i], 'utf-8'))
 	plt.xlabel(u'Time')
 	plt.ylabel(u'FansNum')
-	plt.savefig('../fansnum/'+str(i)+'_'+namelist[i][1]+'.png')
+	plt.savefig('../fansnum_id/'+str(i)+'_'+namelist[i][0]+'_'+namelist[i][1]+'.png')
 	plt.cla()
 
 print 'Finished.('+str(total)+' items in total, '+str(total-bad)+' good ones.)'
