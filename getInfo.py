@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import csv
+import sys
 
 name = ['id','ds','rntype','srvtype','contype', 'custtype', 'nickname', 'vname', 'fans', 'post', 'intro']
 rntype = [0,0,0,0,0]
