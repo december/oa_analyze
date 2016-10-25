@@ -11,3 +11,5 @@ for line in reader:
   if line[0] == '20161020':
     count += 1
   
+print count
+  
