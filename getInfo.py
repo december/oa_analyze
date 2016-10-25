@@ -24,13 +24,13 @@ def makeInfo(s):
 	return temp
 
 def makeStat(v):
-	if int(v[1]) < 5 and int(v[1]) >= 0:
+	if v[1] != '' and int(v[1]) < 5 and int(v[1]) >= 0:
 		rntype[int(v[1])] += 1
-	if int(v[2]) < 3 and int(v[2]) >= 0:
+	if v[2] != '' and int(v[2]) < 3 and int(v[2]) >= 0:
 		srvtype[int(v[2])] += 1		
-	if int(v[3]) < 5 and int(v[3]) >= 0:
+	if v[3] != '' and int(v[3]) < 5 and int(v[3]) >= 0:
 		contype[int(v[3])] += 1
-	if int(v[4]) < 15 and int(v[4]) >= 0:
+	if v[4] != '' and int(v[4]) < 15 and int(v[4]) >= 0:
 		custtype[int(v[4])] += 1
 
 csv.field_size_limit(sys.maxsize)
