@@ -32,6 +32,7 @@ def makeStat(v):
 	if int(v[4]) < 15 and int(v[4]) >= 0:
 		rntype[int(v[4])] += 1
 
+csv.field_size_limit(sys.maxsize)
 csvfile = file('../../rawdata/Wechat_OA/10544_20160101_mod1k.csv', 'r')
 reader = csv.reader(csvfile)
 info = {}
