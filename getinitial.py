@@ -12,7 +12,7 @@ for line in reader:
 
 infolist.sort()
 
-orderfile = open('intialnum.csv', 'wb')
+orderfile = open('../intialnum.csv', 'wb')
 for line in infolist:
 	orderfile.write(line)
 	orderfile.write('\n')
