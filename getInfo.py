@@ -27,11 +27,11 @@ def makeStat(v):
 	if int(v[1]) < 5 and int(v[1]) >= 0:
 		rntype[int(v[1])] += 1
 	if int(v[2]) < 3 and int(v[2]) >= 0:
-		rntype[int(v[2])] += 1		
+		srvtype[int(v[2])] += 1		
 	if int(v[3]) < 5 and int(v[3]) >= 0:
-		rntype[int(v[3])] += 1
+		contype[int(v[3])] += 1
 	if int(v[4]) < 15 and int(v[4]) >= 0:
-		rntype[int(v[4])] += 1
+		custtype[int(v[4])] += 1
 
 csv.field_size_limit(sys.maxsize)
 csvfile = file('../../rawdata/Wechat_OA/10544_20160101_mod1k.csv', 'r')
@@ -58,3 +58,9 @@ for k in info:
 		file.write(p)
 	file.write('\n')
 file.close()
+
+print rntype
+print srvtype
+print contype
+print custtype
+
