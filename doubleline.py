@@ -96,7 +96,6 @@ for line in data:
 			if initiallist[begin][0] > lastid:
 				break
 			begin += 1
-		come = getNum(lastid, begin)
 		go = 0
 		if int(line[13]) == 1:
 			come += 1
