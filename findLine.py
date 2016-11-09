@@ -22,5 +22,10 @@ for item in namelist:
 		idlist.append(infolist)	
 	csvfile.close()
 
-linefile = open('../lineId.csv', '')
-for item in idlist:
+linefile = open('../lineId.csv', 'w')
+for line in idlist:
+	linefile.write(line[0])
+	linefile.write(',')
+	linefile.write(line[1])
+	linefile.write(',')
+	linefile.write(line[2])

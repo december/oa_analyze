@@ -132,17 +132,20 @@ n = len(namelist)
 for i in range(n):
 	single = open('../doubleline_text/'+str(i)+'_'+namelist[i]+'_'+timestring[i]+'.csv', 'w')
 	m = len(timelist)
-	for j in range(m):
+	single.write(timelist[0])
+	for j in range(1, m):
+		single.write(',')
 		single.write(timelist[j])
-		single.write(',')
 	single.write('\n')
-	for j in range(m):
+	single.write(comelist[0])
+	for j in range(1, m):
+		single.write(',')
 		single.write(comelist[j])
-		single.write(',')
 	single.write('\n')
-	for j in range(m):
-		single.write(golist[j])
+	single.write(golist[0])
+	for j in range(1, m):
 		single.write(',')
+		single.write(golist[j])
 	single.write('\n')
 	single.close()
 
