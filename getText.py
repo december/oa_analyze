@@ -130,7 +130,7 @@ for line in data:
 n = len(namelist)
 
 for i in range(n):
-	single = open('../doubleline_text/'+str(i)+'_'+namelist[i]+'_'+timestring[i]+'.csv')
+	single = open('../doubleline_text/'+str(i)+'_'+namelist[i]+'_'+timestring[i]+'.csv', 'w')
 	m = len(timelist)
 	for j in range(m):
 		single.write(timelist[j])
