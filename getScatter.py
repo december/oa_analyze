@@ -21,8 +21,8 @@ for line in reader:
 		k2.append(float(line[2]))
 csvfile.close()
 
-f1 = pyplot.figure(1)
+f1 = plt.figure(1)
 plt.scatter(p, k1)
 
-f2 = pyplot.figure(2)
+f2 = plt.figure(2)
 plt.scatter(p, k2)
