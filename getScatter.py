@@ -17,8 +17,8 @@ reader = csv.reader(csvfile)
 for line in reader:
 	if postnum.has_key(line[0]):
 		p.append(int(postnum[line[0]]))
-		k1.append(int(line[1]))
-		k2.append(int(line[2]))
+		k1.append(float(line[1]))
+		k2.append(float(line[2]))
 csvfile.close()
 
 f1 = pyplot.figure(1)
