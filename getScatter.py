@@ -22,13 +22,13 @@ for line in reader:
 csvfile.close()
 
 f1 = plt.figure(1)
-plt.xscale('log')
+#plt.xscale('log')
 plt.scatter(p, k1)
 plt.savefig('1.png')
 plt.cla()
 
 f2 = plt.figure(2)
-plt.xscale('log')
+#plt.xscale('log')
 plt.scatter(p, k2)
 plt.savefig('2.png')
 plt.cla()
