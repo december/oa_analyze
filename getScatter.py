@@ -1,5 +1,5 @@
 import numpy
-import matplotlib.pyplot
+import matplotlib.pyplot as plt
 import csv
 
 postnum = {}
@@ -22,7 +22,7 @@ for line in reader:
 csvfile.close()
 
 f1 = pyplot.figure(1)
-pyplot.scatter(p, k1)
+plt.scatter(p, k1)
 
 f2 = pyplot.figure(2)
-pyplot.scatter(p, k2)
+plt.scatter(p, k2)
