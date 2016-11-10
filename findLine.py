@@ -3,18 +3,16 @@ import os
 
 def isLine(t):
 	n = len(t)
-	klist = list()
+	dlist = list()
 	for i in range(n-1):
 		d = int(t[i+1]) - int(t[i])
-		if int(t[i]) != 0:
-			k = d * 1.0 / int(t[i])
-			klist.append(k)
+		dlist.append(d)
 	m = int(t[n-1])
 	if m == 0:
 		m += 1
-	if len(klist) == 0:
+	if len(dlist) == 0:
 		return 0
-	if (max(klist) - min(klist)) * 1.0 / m >= 0.05:
+	if (max(dlist) - min(dlist)) * 1.0 / m >= 0.05:
 		return -1
 	return (int(t[n-1]) - int(t[0])) * 1.0 / n
 
