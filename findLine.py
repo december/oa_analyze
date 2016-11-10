@@ -1,5 +1,4 @@
-import numpy
-import matplotlib.pyplot
+import csv
 import os
 
 def isLine(t):
