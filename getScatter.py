@@ -27,4 +27,4 @@ plt.savefig('1.png')
 
 f2 = plt.figure(2)
 plt.scatter(p, k2)
-plt.savefig('1.png')
+plt.savefig('2.png')
