@@ -24,7 +24,7 @@ p = list()
 csvfile = file('../lineId.csv', 'r')
 reader = csv.reader(csvfile)
 for line in reader:
-	if postnum.has_key(line[0]) and int(postnum[line[0]]) <= 100:
+	if postnum.has_key(line[0]):
 		p.append(int(postnum[line[0]]))
 		k1.append(float(line[1]))
 		k2.append(float(line[2]))
