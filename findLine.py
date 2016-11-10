@@ -3,13 +3,17 @@ import os
 
 def isLine(t):
 	n = len(t)
+	klist = list()
 	for i in range(n-1):
 		d = int(t[i+1]) - int(t[i])
-		k = 0
 		if int(t[i]) != 0:
 			k = d * 1.0 / int(t[i])
-		if k > 0.05 and d > 5:
-			return -1
+			klist.append(k)
+	m = int(t[n-1])
+	if m == 0:
+		m += 1
+	if (max(klist) - min(klist)) * 1.0 / m >= 0.05:
+		return -1
 	return (int(t[n-1]) - int(t[0])) * 1.0 / n
 
 namelist = os.listdir('../doubleline_text/')
