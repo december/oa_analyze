@@ -14,7 +14,7 @@ def isLine(t):
 		return 0
 	if (max(dlist) - min(dlist)) * 1.0 / m >= 0.05:
 		return -1
-	return (int(t[n-1]) - int(t[0])) * 1.0 / n / m
+	return (int(t[n-1]) - int(t[0])) * 1.0 * 1000 / n / m
 
 namelist = os.listdir('../doubleline_text/')
 idlist = list()
