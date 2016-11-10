@@ -33,10 +33,10 @@ for item in namelist:
 
 linefile = open('../lineId.csv', 'w')
 for line in idlist:
-	linefile.write(line[0])
+	linefile.write(str(line[0]))
 	linefile.write(',')
-	linefile.write(line[1])
+	linefile.write(str(line[1]))
 	linefile.write(',')
-	linefile.write(line[2])
+	linefile.write(str(line[2]))
 	linefile.write('\n')
 linefile.close()
