@@ -23,6 +23,8 @@ csvfile.close()
 
 f1 = plt.figure(1)
 plt.scatter(p, k1)
+plt.show()
 
 f2 = plt.figure(2)
 plt.scatter(p, k2)
+plt.show()
