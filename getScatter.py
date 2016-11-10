@@ -1,5 +1,6 @@
 import numpy
 import matplotlib.pyplot
+import csv
 
 postnum = {}
 csvfile = file('../oaInfo.csv', 'r')
