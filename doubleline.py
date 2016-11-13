@@ -27,6 +27,14 @@ def delta(begin, now):
 	d = n - b
 	return d.days
 
+def makeDelta(ts):
+	temp = list()
+	temp.append(ts[0])
+	m = len(ts)
+	for i in range(1, m):
+		temp.append(ts[i] - ts[i-1])
+	return temp
+
 csvfile = file('../../rawdata/Wechat_OA/10059_20160101_mod1k.csv', 'r')
 reader = csv.reader(csvfile)
 comelist = list()
@@ -54,6 +62,7 @@ for line in data:
 	orderfile.write('\n')
 orderfile.close()
 
+'''
 csvfile = file('../intialnum.csv', 'r')
 reader = csv.reader(csvfile)
 initiallist = list()
@@ -62,6 +71,7 @@ for line in reader:
 
 begin = 0
 initsize = len(initiallist)
+'''
 
 for line in data:
 	if line[0][0] != '2':
@@ -89,6 +99,7 @@ for line in data:
 		temptime = list()
 		temptime.append(0)
 		come = 0
+		'''
 		while begin < initsize:
 			if initiallist[begin][0] == lastid:
 				come = int(initiallist[begin][1])
@@ -96,6 +107,7 @@ for line in data:
 			if initiallist[begin][0] > lastid:
 				break
 			begin += 1
+		'''
 		go = 0
 		if int(line[13]) == 1:
 			come += 1
@@ -131,13 +143,23 @@ n = len(namelist)
 
 for i in range(n):
 	x = np.array(comelist[i])
+	dx = np.array(makeDelta(comelist[i]))
 	y = np.array(golist[i])
+	dy = np.array(makeDelta(golist[i]))
 	z = np.array(timelist[i])
 	plt.plot(z, x, 'ob')
 	plt.plot(z, y, 'or')
 	plt.title(unicode(timestring[i], 'utf-8'))
 	plt.xlabel(u'Time')
 	plt.ylabel(u'Number')
-	plt.savefig('../doubleline_init/'+str(i)+'_'+namelist[i]+'.png')
+	plt.savefig('../doubleline_all/'+str(i)+'_'+namelist[i]+'.png')
+	plt.cla()
+
+	plt.plot(z, dx, 'ob')
+	plt.plot(z, dy, 'or')
+	plt.title(unicode(timestring[i], 'utf-8'))
+	plt.xlabel(u'Time')
+	plt.ylabel(u'Speed')
+	plt.savefig('../delta_all/'+str(i)+'_'+namelist[i]+'.png')
 	plt.cla()
 
