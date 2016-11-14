@@ -5,8 +5,10 @@ import datetime
 import time
 
 def isGood(c, g, t):
+	'''
 	if t == '20150701':
 		return False
+	'''
 	if len(c) <= 10:
 		return False
 	if max(c) <= 100 and max(g) <= 100:
@@ -143,22 +145,43 @@ for line in data:
 
 n = len(namelist)
 
+peakdate = {}
+for i in range(n):
+	m = len(comelist[i])
+	temp = list()
+	for j in range(1, m):
+		d = comelist[j] - comelist[j-1]
+		base = comelist[j-1]
+		if base == 0:
+			base += 1
+		if d * 1.0 / base >= 0.25 and d > 25:
+			temp.append(j)
+	peakdate[namelist[i]] = temp
+peakfile = open('../peakdate.csv', 'wb')
+for k in peakdate:
+	peakfile.write(k)
+	for item in peakdate[k]:
+		peakfile.write(',')
+		peakfile.write(str(item))
+	peakfile.write('\n')
+peakfile.close()
+
 for i in range(n):
 	x = np.array(comelist[i])
 	dx = np.array(makeDelta(comelist[i]))
 	y = np.array(golist[i])
 	dy = np.array(makeDelta(golist[i]))
 	z = np.array(timelist[i])
-	plt.plot(z, x, 'ob')
-	plt.plot(z, y, 'or')
+	plt.plot(z, x, 'b')
+	plt.plot(z, y, 'r')
 	plt.title(unicode(timestring[i], 'utf-8'))
 	plt.xlabel(u'Time')
 	plt.ylabel(u'Number')
 	plt.savefig('../doubleline_all/'+str(i)+'_'+namelist[i]+'.png')
 	plt.cla()
 
-	plt.plot(z, dx, 'b')
-	plt.plot(z, dy, 'r')
+	plt.scatter(z, dx, 'b')
+	plt.scatter(z, dy, 'r')
 	plt.title(unicode(timestring[i], 'utf-8'))
 	plt.xlabel(u'Time')
 	plt.ylabel(u'Speed')
