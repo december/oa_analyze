@@ -4,7 +4,9 @@ import csv
 import datetime
 import time
 
-def isGood(c, g):
+def isGood(c, g, t):
+	if t == '20150701':
+		return False
 	if len(c) <= 10:
 		return False
 	if max(c) <= 100 and max(g) <= 100:
@@ -81,7 +83,7 @@ for line in data:
 		if not first:
 			tempcome.append(come)
 			tempgo.append(go)
-			if isGood(tempcome, tempgo):
+			if isGood(tempcome, tempgo, time):
 				namelist.append(lastid)
 				comelist.append(tempcome)
 				golist.append(tempgo)
@@ -155,8 +157,8 @@ for i in range(n):
 	plt.savefig('../doubleline_all/'+str(i)+'_'+namelist[i]+'.png')
 	plt.cla()
 
-	plt.plot(z, dx, 'ob')
-	plt.plot(z, dy, 'or')
+	plt.plot(z, dx, 'b')
+	plt.plot(z, dy, 'r')
 	plt.title(unicode(timestring[i], 'utf-8'))
 	plt.xlabel(u'Time')
 	plt.ylabel(u'Speed')
