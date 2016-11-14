@@ -35,7 +35,7 @@ def makeDelta(ts):
 		temp.append(ts[i] - ts[i-1])
 	return temp
 
-csvfile = file('../../rawdata/Wechat_OA/10059_20160101_mod1k.csv', 'r')
+csvfile = file('../../rawdata/Wechat_OA/10059_all_mod1k.csv', 'r')
 reader = csv.reader(csvfile)
 comelist = list()
 namelist = list()
