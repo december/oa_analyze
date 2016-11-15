@@ -3,7 +3,7 @@ import numpy as np
 import csv
 import sys
 
-name = ['id','ds','rntype','srvtype','contype', 'custtype', 'nickname', 'vname', 'fans', 'post', 'intro']
+name = ['id','ds','rntype','srvtype','contype', 'custtype', 'nickname', 'vname', 'fans', 'post', 'intro','settime']
 rntype = [0,0,0,0,0]
 srvtype = [0,0,0]
 contype = [0,0,0,0,0]
@@ -21,6 +21,7 @@ def makeInfo(s):
 	temp.append(s[4])
 	temp.append(s[23])
 	temp.append(s[16])
+	temp.append(s[13])
 	return temp
 
 def makeStat(v):

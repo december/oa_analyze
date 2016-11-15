@@ -5,11 +5,15 @@ import datetime
 import time
 import math
 
+earliest = '1435680000'
+
 def isGood(c, g, t):
 	'''
 	if t == '20150701':
 		return False
 	'''
+	if t < earliest:
+		return False
 	if len(c) <= 10:
 		return False
 	if max(c) <= 100 and max(g) <= 100:
@@ -78,6 +82,13 @@ begin = 0
 initsize = len(initiallist)
 '''
 
+csvfile = file('../oaInfo.csv', 'r')
+reader = csv.reader(csvfile)
+setdic = {}
+for line in reader:
+	setdic[line[0]] = line[11]
+noidlist = list()
+
 for line in data:
 	if line[0][0] != '2':
 		print line[0][0]
@@ -86,14 +97,17 @@ for line in data:
 		if not first:
 			tempcome.append(come)
 			tempgo.append(go)
-			if isGood(tempcome, tempgo, time):
-				namelist.append(lastid)
-				comelist.append(tempcome)
-				golist.append(tempgo)
-				timelist.append(temptime)
-				timestring.append(time+'-'+lasttime)
+			if setdic.has_key(lastid):
+				if isGood(tempcome, tempgo, setdic[lastid]):
+					namelist.append(lastid)
+					comelist.append(tempcome)
+					golist.append(tempgo)
+					timelist.append(temptime)
+					timestring.append(time+'-'+lasttime)
+				else:
+					bad += 1
 			else:
-				bad += 1
+				noidlist.append(lastid)
 		else:
 			first = False
 		lastid = line[4]
@@ -238,13 +252,23 @@ for i in range(n):
 	y = np.array(golist[i])
 	dy = np.array(makeDelta(golist[i]))
 	z = np.array(timelist[i])
-
+	c = list()
+	flag = True
+	m = len(comelist[i])
+	for j in range(m):
+		c.append(comelist[i] - golist[i])
+		if comelist[i] - golist[i] < 0:
+			flag = False
+			break
+	c = np.array(c)
 	plt.plot(z, x, 'b')
 	plt.plot(z, y, 'r')
+	if flag:
+		plt.plot(z, c, 'k')
 	plt.title(unicode(timestring[i], 'utf-8'))
 	plt.xlabel(u'Time')
 	plt.ylabel(u'Number')
-	plt.savefig('../doubleline_all/'+str(i)+'_'+namelist[i]+'.png')
+	plt.savefig('../tripleline_new/'+str(i)+'_'+namelist[i]+'.png')
 	plt.cla()
 
 	plt.scatter(z, dx, 'b')
@@ -252,6 +276,11 @@ for i in range(n):
 	plt.title(unicode(timestring[i], 'utf-8'))
 	plt.xlabel(u'Time')
 	plt.ylabel(u'Speed')
-	plt.savefig('../delta_all/'+str(i)+'_'+namelist[i]+'.png')
+	plt.savefig('../delta_new/'+str(i)+'_'+namelist[i]+'.png')
 	plt.cla()
 
+noidfile = open('../missingID.csv', 'wb')
+for item in noidlist:
+	noidfile.write(item)
+	noidfile.write('\n')
+noidfile.close()
