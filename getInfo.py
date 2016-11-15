@@ -39,11 +39,12 @@ reader = csv.reader(csvfile)
 info = {}
 for line in reader:
 	#if line[10] == '1':
-	if info.has_key(line[1]):
-		if line[0] > info[line[1]][0]:
+	if line[0][0] == '2':
+		if info.has_key(line[1]):
+			if line[0] > info[line[1]][0]:
+				info[line[1]] = makeInfo(line)
+		else:
 			info[line[1]] = makeInfo(line)
-	else:
-		info[line[1]] = makeInfo(line)
 	#else:
 	#	if info.has_key(line[1]):
 	#		if line[0] > info[line[1]][0]:
