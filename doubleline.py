@@ -212,7 +212,7 @@ for key in ht:
 	x = list()
 	y = list()
 	for i in range(binnum):
-		x.append(round(math.pow.(10, b + d * (0.5 + i))))
+		x.append(round(math.pow(10, b + d * (0.5 + i))))
 		y.append(0)
 	for item in ht[key]:
 		y[int((log(item+1) - b) / d)] += 1
@@ -238,7 +238,7 @@ for i in range(n):
 	y = np.array(golist[i])
 	dy = np.array(makeDelta(golist[i]))
 	z = np.array(timelist[i])
-	
+
 	plt.plot(z, x, 'b')
 	plt.plot(z, y, 'r')
 	plt.title(unicode(timestring[i], 'utf-8'))
