@@ -54,6 +54,7 @@ for line in data:
 	orderfile.write('\n')
 orderfile.close()
 
+'''
 csvfile = file('../intialnum.csv', 'r')
 reader = csv.reader(csvfile)
 initiallist = list()
@@ -62,6 +63,7 @@ for line in reader:
 
 begin = 0
 initsize = len(initiallist)
+'''
 
 for line in data:
 	if line[0][0] != '2':
@@ -89,6 +91,7 @@ for line in data:
 		temptime = list()
 		temptime.append(0)
 		come = 0
+		'''
 		while begin < initsize:
 			if initiallist[begin][0] == lastid:
 				come = int(initiallist[begin][1])
@@ -96,6 +99,7 @@ for line in data:
 			if initiallist[begin][0] > lastid:
 				break
 			begin += 1
+		'''
 		go = 0
 		if int(line[13]) == 1:
 			come += 1
