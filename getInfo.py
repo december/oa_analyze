@@ -38,16 +38,16 @@ csvfile = file('/mnt/data5/luyunfei/rawdata/Wechat_OA/10544_all_mod1k.csv', 'r')
 reader = csv.reader(csvfile)
 info = {}
 for line in reader:
-	if line[10] == '1':
-		if info.has_key(line[1]):
-			if line[0] > info[line[1]][0]:
-				info[line[1]] = makeInfo(line)
-		else:
+	#if line[10] == '1':
+	if info.has_key(line[1]):
+		if line[0] > info[line[1]][0]:
 			info[line[1]] = makeInfo(line)
 	else:
-		if info.has_key(line[1]):
-			if line[0] > info[line[1]][0]:
-				del info[line[1]]
+		info[line[1]] = makeInfo(line)
+	#else:
+	#	if info.has_key(line[1]):
+	#		if line[0] > info[line[1]][0]:
+	#			del info[line[1]]
 
 file = open('../oaInfo.csv','wb')
 for k in info:
