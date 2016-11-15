@@ -12,15 +12,15 @@ custtype = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 def makeInfo(s):
 	temp = list()
 	temp.append(s[0])
-	temp.append(s[11])
-	temp.append(s[14])
-	temp.append(s[23])
-	temp.append(s[30])
-	temp.append(s[13])
+	temp.append(s[7])
+	temp.append(s[10])
+	temp.append(s[19])
 	temp.append(s[24])
 	temp.append(s[9])
-	temp.append(s[27])
-	temp.append(s[19])
+	temp.append(s[20])
+	temp.append(s[4])
+	temp.append(s[23])
+	temp.append(s[16])
 	return temp
 
 def makeStat(v):
@@ -34,7 +34,7 @@ def makeStat(v):
 		custtype[int(v[4])] += 1
 
 csv.field_size_limit(sys.maxsize)
-csvfile = file('../../rawdata/Wechat_OA/10544_20160101_mod1k.csv', 'r')
+csvfile = file('/mnt/data5/luyunfei/rawdata/Wechat_OA/10544_all_mod1k.csv', 'r')
 reader = csv.reader(csvfile)
 info = {}
 for line in reader:

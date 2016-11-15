@@ -238,6 +238,7 @@ for i in range(n):
 	y = np.array(golist[i])
 	dy = np.array(makeDelta(golist[i]))
 	z = np.array(timelist[i])
+	
 	plt.plot(z, x, 'b')
 	plt.plot(z, y, 'r')
 	plt.title(unicode(timestring[i], 'utf-8'))
