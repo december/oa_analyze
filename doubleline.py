@@ -3,6 +3,7 @@ import numpy as np
 import csv
 import datetime
 import time
+import math
 
 def isGood(c, g, t):
 	'''
@@ -39,7 +40,7 @@ def makeDelta(ts):
 		temp.append(ts[i] - ts[i-1])
 	return temp
 
-csvfile = file('../../rawdata/Wechat_OA/10059_all_mod1k.csv', 'r')
+csvfile = file('/mnt/data5/luyunfei/rawdata/Wechat_OA/10059_all_mod1k.csv', 'r')
 reader = csv.reader(csvfile)
 comelist = list()
 namelist = list()
@@ -166,7 +167,72 @@ for k in peakdate:
 	peakfile.write('\n')
 peakfile.close()
 
+total = len(data)
+count = 0
+holdtime = {}
+while count < total:
+	if data[count][0][0] != '2':
+		count += 1
+		continue
+	if peakfile.has_key(data[count][4]):
+		crid = data[count][4]
+		begintime = line[0]
+		cindex = 0
+		htdic = {}
+		tempht = list()
+		peaknum = len(peakfile[crid])
+		while cindex < peaknum:
+			while delta(begintime, data[count][0]) < peakfile[crid][cindex]:
+				count += 1
+			peaktime = data[count][0]
+			newcount = count
+			while newcount < total and data[newcount][4] == crid:
+				if int(data[newcount][13]) == 1 and data[newcount][0] == peaktime:
+					htdic[data[newcount][4]] = peaktime
+				if int(data[newcount][13]) == -1 and htdic.has_key(date[newcount][4]):
+					tempht.append(delta(htdic[data[newcount][4]], data[newcount][0]))
+					htdic.pop(data[newcount][4])
+				if len(htdic) == 0 and data[newcount][0] != peaktime:
+					break;
+				newcount += 1
+			cindex += 1
+		holdtime[crid] = tempht
+		while crid == data[count][4]:
+			count += 1
+	else:
+		count += 1
+
+binnum = 10
+for key in ht:
+	b = math.log(min(ht[key]) + 1)
+	e = math.log(max(ht[key]) + 1)
+	if b == e:
+		continue
+	d = (b - e) * 1.0 / (binnum - 1)
+	x = list()
+	y = list()
+	for i in range(binnum):
+		x.append(round(math.pow.(10, b + d * (0.5 + i))))
+		y.append(0)
+	for item in ht[key]:
+		y[int((log(item+1) - b) / d)] += 1
+	m = len(ht[key])
+	for i in range(binnum):
+		y[binnum] = y[binnum] * 1.0 / m
+	x = np.array(x)
+	y = np.array(y)
+	plt.plot(x, y, 'o')
+	plt.title(str(min(ht[key]))+' days to '+str(max(ht[key]))+' days')
+	plt.xlabel('Holding Time')
+	plt.ylabel('Distribution')
+	plt.xscale('log')
+	plt.savefig('../holdtime/'+str(k)+'.png')
+	plt.cla()
+
 for i in range(n):
+	#singlefile = open('../dldata/'+str(i)+'_'+namelist[i]+'.csv')
+	#singlefile.write()
+
 	x = np.array(comelist[i])
 	dx = np.array(makeDelta(comelist[i]))
 	y = np.array(golist[i])
