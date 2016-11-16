@@ -281,20 +281,18 @@ for i in range(n):
 	z2 = timelist[i]
 	dx = makeDelta(comelist[i])
 	dy = makeDelta(golist[i])
-	index = 0
-	while index < len(dx):
+	index = m - 1
+	while index >= 0:
 		if dx[index] == 0:
 			dx.pop(index)
 			z1.pop(index)
-		else:
-			index += 1
-	index = 0
-	while index < len(dy):
+		index -= 1
+	index = m - 1
+	while index >= 0:
 		if dy[index] == 0:
 			dy.pop(index)
 			z2.pop(index)
-		else:
-			index += 1
+		index -= 1
 	dx = np.array(dx)
 	dy = np.array(dy)
 	z1 = np.array(z1)

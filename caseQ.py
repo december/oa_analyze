@@ -9,7 +9,7 @@ T = [327, 188, 137, 227, 367, 0, 329, 0, 0, 0, 10, 60, 24, 92, 294, 146, 182, 20
 fixnum = 1.2
 
 n = len(filename)
-for i in range(n):
+for i in range(1):
 	csvfile = file('../doubleline_text/'+filename[i]+'.csv')
 	name = filename[i].split('_')[1]
 	reader = csv.reader(csvfile)
@@ -34,7 +34,7 @@ for i in range(n):
 	plt.savefig('../coupon/'+name+'_t.png')
 	plt.cla()
 
-	plt.plot(y, z, 'or')
+	plt.plot(y, z, 'r')
 	plt.title(name)
 	plt.xlabel('ln(t)')
 	plt.ylabel('ln(1-Q(t)/N)')
