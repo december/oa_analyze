@@ -232,7 +232,7 @@ for key in holdtime:
 		y.append(0)
 	for item in holdtime[key]:
 		y[int((math.log(item+1) - b) / d)] += 1
-	m = len(ht[key])
+	m = len(holdtime[key])
 	for i in range(binnum):
 		y[binnum] = y[binnum] * 1.0 / m
 	x = np.array(x)
