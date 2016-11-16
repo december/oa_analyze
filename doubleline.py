@@ -229,7 +229,7 @@ for key in holdtime:
 	for i in range(binnum):
 		x.append(round(math.pow(10, b + d * (0.5 + i))))
 		y.append(0)
-	for item in ht[key]:
+	for item in holdtime[key]:
 		y[int((log(item+1) - b) / d)] += 1
 	m = len(ht[key])
 	for i in range(binnum):
