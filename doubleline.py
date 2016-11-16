@@ -218,7 +218,7 @@ while count < total:
 		count += 1
 
 binnum = 10
-for key in ht:
+for key in holdtime:
 	b = math.log(min(holdtime[key]) + 1)
 	e = math.log(max(holdtime[key]) + 1)
 	if b == e:
