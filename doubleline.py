@@ -165,8 +165,8 @@ for i in range(n):
 	m = len(comelist[i])
 	temp = list()
 	for j in range(1, m):
-		d = comelist[j] - comelist[j-1]
-		base = comelist[j-1]
+		d = comelist[i][j] - comelist[i][j-1]
+		base = comelist[i][j-1]
 		if base == 0:
 			base += 1
 		if d * 1.0 / base >= 0.25 and d > 25:
