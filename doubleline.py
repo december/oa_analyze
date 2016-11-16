@@ -171,7 +171,8 @@ for i in range(n):
 			base += 1
 		if d * 1.0 / base >= 0.25 and d > 25:
 			temp.append(j)
-	peakdate[namelist[i]] = temp
+	if len(temp) > 0:
+		peakdate[namelist[i]] = temp
 peakfile = open('../peakdate.csv', 'wb')
 for k in peakdate:
 	peakfile.write(k)
