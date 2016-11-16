@@ -45,8 +45,8 @@ for item in namelist:
 		plt.title(idnum+': Peak '+str(count))
 		plt.xlabel('Q(t)')
 		plt.ylabel('Q(t+1)')
-		plt.xscale('log')
-		plt.yscale('log')
+		#plt.xscale('log')
+		#plt.yscale('log')
 		plt.savefig('../Qcurve/'+idnum+'_'+str(count)+'.png')
 		plt.cla()
 		count += 1
