@@ -29,17 +29,17 @@ for item in namelist:
 	count = 0
 	while count < len(peakdic[idnum]):
 		idb = int(peakdic[idnum][count])
-		ide = min(10, len(singlefile[0]))
+		ide = min(idb + 10, len(singlefile[0]))
 		if count + 1 < len(peakdic[idnum]):
 			ide = max(ide, int(peakdic[idnum][count+1]))
 		x = list()
 		y = list()
 		r = list()
-		for i in range(idb, ide - 1):
-			if (int(singlefile[2][i]) > 0 and int(singlefile[2][i+1]) > 0):
+		for i in range(idb, ide - 5):
+			if (int(singlefile[2][i]) > 0 and int(singlefile[2][i+5]) > 0):
 				x.append(int(singlefile[2][i]))
 				r.append(int(singlefile[2][i]))
-				y.append(int(singlefile[2][i+1]))
+				y.append(int(singlefile[2][i+5]))
 
 		x = np.array(x)
 		y = np.array(y)
@@ -48,7 +48,7 @@ for item in namelist:
 		plt.plot(x, r, 'k')
 		plt.title(idnum+': Peak '+str(count))
 		plt.xlabel('Q(t)')
-		plt.ylabel('Q(t+1)')
+		plt.ylabel('Q(t+5)')
 		plt.xscale('log')
 		plt.yscale('log')
 		plt.savefig('../Qcurve/'+idnum+'_'+str(count)+'.png')

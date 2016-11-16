@@ -6,10 +6,12 @@ filename = ['61_2390862830_20150702-20161110', '102_2391481967_20150710-20161111
 N = [460, 2160, 1100, 1140, 60, 400, 700, 535, 6700, 350, 255, 970, 230, 230, 3900, 7200, 630, 8900, 600, 1400, 490, 1500, 1130, 56500, 1000]
 T = [327, 188, 137, 227, 367, 0, 329, 0, 0, 0, 10, 60, 24, 92, 294, 146, 182, 20, 2, 263, 20, 291, 198, 153, 56]
 
+fixnum = 1.2
+
 n = len(filename)
 for i in range(n):
 	csvfile = file('../doubleline_text/'+filename[i]+'.csv')
-	name = filename.split('_')[1]
+	name = filename[i].split('_')[1]
 	reader = csv.reader(csvfile)
 	single = list()
 	for line in reader:
@@ -21,11 +23,11 @@ for i in range(n):
 	for j in range(T[i], len(single[2])):
 		x.append(j+1)
 		y.append(np.log(j+1))
-		z.append(np.log(1 - int(single[2][j]) * 1.0 / N[i]))
+		z.append(np.log(1 - int(single[2][j]) * 1.0 / N[i] / fixnum))
 	x = np.array(x)
 	y = np.array(y)
 	z = np.array(z)
-	plt.plot(x, z, 'or')
+	plt.plot(x, z, 'r')
 	plt.title(name)
 	plt.xlabel('t')
 	plt.ylabel('ln(1-Q(t)/N)')
