@@ -190,7 +190,7 @@ while count < total:
 		continue
 	if peakdate.has_key(data[count][4]):
 		crid = data[count][4]
-		begintime = line[0]
+		begintime = data[count][0]
 		cindex = 0
 		htdic = {}
 		tempht = list()
