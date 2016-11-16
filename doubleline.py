@@ -262,8 +262,8 @@ for i in range(n):
 	flag = True
 	m = len(comelist[i])
 	for j in range(m):
-		c.append(int(comelist[i]) - int(golist[i]))
-		if int(comelist[i]) - int(golist[i]) < 0:
+		c.append(int(comelist[i][j]) - int(golist[i][j]))
+		if int(comelist[i][j]) - int(golist[i][j]) < 0:
 			flag = False
 			break
 	c = np.array(c)
