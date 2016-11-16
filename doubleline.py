@@ -203,7 +203,7 @@ while count < total:
 			while newcount < total and data[newcount][4] == crid:
 				if int(data[newcount][13]) == 1 and data[newcount][0] == peaktime:
 					htdic[data[newcount][4]] = peaktime
-				if int(data[newcount][13]) == -1 and htdic.has_key(date[newcount][4]):
+				if int(data[newcount][13]) == -1 and htdic.has_key(data[newcount][4]):
 					tempht.append(delta(htdic[data[newcount][4]], data[newcount][0]))
 					htdic.pop(data[newcount][4])
 				if len(htdic) == 0 and data[newcount][0] != peaktime:
