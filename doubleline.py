@@ -216,6 +216,7 @@ while count < total:
 			count += 1
 	else:
 		count += 1
+print 'Finshed finding peak.'
 
 binnum = 10
 for key in holdtime:
@@ -230,7 +231,7 @@ for key in holdtime:
 		x.append(round(math.pow(10, b + d * (0.5 + i))))
 		y.append(0)
 	for item in holdtime[key]:
-		y[int((log(item+1) - b) / d)] += 1
+		y[int((math.log(item+1) - b) / d)] += 1
 	m = len(ht[key])
 	for i in range(binnum):
 		y[binnum] = y[binnum] * 1.0 / m
@@ -243,6 +244,8 @@ for key in holdtime:
 	plt.xscale('log')
 	plt.savefig('../holdtime/'+str(k)+'.png')
 	plt.cla()
+print 'Finished holding time.'
+
 
 for i in range(n):
 	#singlefile = open('../dldata/'+str(i)+'_'+namelist[i]+'.csv')
