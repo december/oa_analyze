@@ -35,11 +35,10 @@ for item in namelist:
 		x = list()
 		y = list()
 		for i in range(idb, ide - 1):
-			x.append(singlefile[2][i])
+			x.append(int(singlefile[2][i]))
 		for i in range(idb + 1, ide):
-			y.append(singlefile[2][i])
-		print x
-		print y
+			y.append(int(singlefile[2][i]))
+
 		x = np.array(x)
 		y = np.array(y)
 		plt.plot(x, y, 'or')
