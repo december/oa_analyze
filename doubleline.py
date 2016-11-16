@@ -218,8 +218,8 @@ while count < total:
 
 binnum = 10
 for key in ht:
-	b = math.log(min(ht[key]) + 1)
-	e = math.log(max(ht[key]) + 1)
+	b = math.log(min(holdtime[key]) + 1)
+	e = math.log(max(holdtime[key]) + 1)
 	if b == e:
 		continue
 	d = (b - e) * 1.0 / (binnum - 1)
@@ -236,7 +236,7 @@ for key in ht:
 	x = np.array(x)
 	y = np.array(y)
 	plt.plot(x, y, 'o')
-	plt.title(str(min(ht[key]))+' days to '+str(max(ht[key]))+' days')
+	plt.title(str(min(holdtime[key]))+' days to '+str(max(holdtime[key]))+' days')
 	plt.xlabel('Holding Time')
 	plt.ylabel('Distribution')
 	plt.xscale('log')
