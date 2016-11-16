@@ -220,6 +220,8 @@ print 'Finshed finding peak.'
 
 binnum = 10
 for key in holdtime:
+	if len(holdtime[key]) == 0:
+		continue
 	b = math.log(min(holdtime[key]) + 1)
 	e = math.log(max(holdtime[key]) + 1)
 	if b == e:
@@ -252,9 +254,9 @@ for i in range(n):
 	#singlefile.write()
 
 	x = np.array(comelist[i])
-	dx = np.array(makeDelta(comelist[i]))
+
 	y = np.array(golist[i])
-	dy = np.array(makeDelta(golist[i]))
+
 	z = np.array(timelist[i])
 	c = list()
 	flag = True
@@ -274,12 +276,29 @@ for i in range(n):
 	plt.ylabel(u'Number')
 	plt.savefig('../tripleline_new/'+str(i)+'_'+namelist[i]+'.png')
 	plt.cla()
-
-	plt.scatter(z, dx, 'b')
-	plt.scatter(z, dy, 'r')
+	
+	z1 = timelist[i]
+	z2 = timelist[i]
+	dx = makeDelta(comelist[i])
+	dy = makeDelta(golist[i])
+	m = len(z1)
+	for j in range(m):
+		if dx[j] == 0:
+			dx.pop(j)
+			z1.pop(j)
+		if dy[j] == 0:
+			dy.pop(j)
+			z2.pop(j)
+	dx = np.array(dx)
+	dy = np.array(dy)
+	z1 = np.array(z1)
+	z2 = np.array(z2)
+	plt.scatter(z1, dx, 'b')
+	plt.scatter(z2, dy, 'r')
+	plt.yscale('log')
 	plt.title(unicode(timestring[i], 'utf-8'))
 	plt.xlabel(u'Time')
-	plt.ylabel(u'Speed')
+	plt.ylabel(u'Delta')
 	plt.savefig('../delta_new/'+str(i)+'_'+namelist[i]+'.png')
 	plt.cla()
 
