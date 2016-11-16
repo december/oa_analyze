@@ -35,9 +35,9 @@ for item in namelist:
 		x = list()
 		y = list()
 		for i in range(idb, ide - 1):
-			if (int(singlefile[2][i]) > 0 and int(singlefile[2][i+1]) > 0):
-				x.append(int(singlefile[2][i]))
-				y.append(int(singlefile[2][i+1]))
+			#if (int(singlefile[2][i]) > 0 and int(singlefile[2][i+1]) > 0):
+			x.append(int(singlefile[2][i]))
+			y.append(int(singlefile[2][i+1]))
 
 		x = np.array(x)
 		y = np.array(y)
