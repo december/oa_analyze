@@ -28,10 +28,10 @@ for item in namelist:
 	csvfile.close()
 	count = 0
 	while count < len(peakdic[idnum]):
-		idb = peakdic[idnum][count]
+		idb = int(peakdic[idnum][count])
 		ide = len(singlefile[0])
 		if count + 1 < len(peakdic[idnum]):
-			ide = peakdic[idnum][count+1]
+			ide = int(peakdic[idnum][count+1])
 		x = list()
 		y = list()
 		for i in range(idb, ide - 1):
