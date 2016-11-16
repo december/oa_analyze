@@ -244,7 +244,7 @@ for key in holdtime:
 	plt.xlabel('Holding Time')
 	plt.ylabel('Distribution')
 	plt.xscale('log')
-	plt.savefig('../holdtime/'+str(k)+'.png')
+	plt.savefig('../holdtime/'+str(key)+'.png')
 	plt.cla()
 print 'Finished holding time.'
 
@@ -262,8 +262,8 @@ for i in range(n):
 	flag = True
 	m = len(comelist[i])
 	for j in range(m):
-		c.append(comelist[i] - golist[i])
-		if comelist[i] - golist[i] < 0:
+		c.append(int(comelist[i]) - int(golist[i]))
+		if int(comelist[i]) - int(golist[i]) < 0:
 			flag = False
 			break
 	c = np.array(c)
