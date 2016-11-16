@@ -188,15 +188,15 @@ while count < total:
 	if data[count][0][0] != '2':
 		count += 1
 		continue
-	if peakfile.has_key(data[count][4]):
+	if peakdate.has_key(data[count][4]):
 		crid = data[count][4]
 		begintime = line[0]
 		cindex = 0
 		htdic = {}
 		tempht = list()
-		peaknum = len(peakfile[crid])
+		peaknum = len(peakdate[crid])
 		while cindex < peaknum:
-			while delta(begintime, data[count][0]) < peakfile[crid][cindex]:
+			while delta(begintime, data[count][0]) < peakdate[crid][cindex]:
 				count += 1
 			peaktime = data[count][0]
 			newcount = count
