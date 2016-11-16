@@ -234,7 +234,7 @@ for key in holdtime:
 		y[int((math.log(item+1) - b) / d)] += 1
 	m = len(holdtime[key])
 	for i in range(binnum):
-		y[binnum] = y[binnum] * 1.0 / m
+		y[i] = y[i] * 1.0 / m
 	x = np.array(x)
 	y = np.array(y)
 	plt.plot(x, y, 'o')
