@@ -38,6 +38,8 @@ for item in namelist:
 			x.append(singlefile[2][i])
 		for i in range(idb + 1, ide):
 			y.append(singlefile[2][i])
+		print x
+		print y
 		x = np.array(x)
 		y = np.array(y)
 		plt.plot(x, y, 'or')
