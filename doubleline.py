@@ -282,8 +282,7 @@ for i in range(n):
 	z2 = timelist[i]
 	dx = makeDelta(comelist[i])
 	dy = makeDelta(golist[i])
-	if not len(dx) == len(z1) or not len(dy) == len(z2):
-		continue
+
 	index = len(z1) - 1
 	while index >= 0:
 		if dx[index] == 0:
@@ -300,6 +299,8 @@ for i in range(n):
 	dy = np.array(dy)
 	z1 = np.array(z1)
 	z2 = np.array(z2)
+	if not len(dx) == len(z1) or not len(dy) == len(z2):
+		continue
 	plt.plot(z1, dx, 'b')
 	plt.plot(z2, dy, 'r')
 	plt.yscale('log')
