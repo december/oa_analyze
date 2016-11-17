@@ -281,6 +281,8 @@ for i in range(n):
 	z2 = timelist[i]
 	dx = makeDelta(comelist[i])
 	dy = makeDelta(golist[i])
+	if not dx == z1 or not dy == z2:
+		continue
 	index = len(z1) - 1
 	while index >= 0:
 		if dx[index] == 0:
