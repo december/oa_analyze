@@ -53,7 +53,7 @@ def exponential(params, tlist, glist):
 def calcPL(beta, N, nsteps):
 	model = list()
 	for i in range(nsteps):
-		model.append(N * (1 - math.pow(i, -1 * beta)))
+		model.append(N * (1 - math.pow(i + 1, -1 * beta)))
 	return model
 
 def powerlaw(params, tlist, glist):
