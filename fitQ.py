@@ -1,5 +1,6 @@
 from lmfit import minimize, Parameters, Parameter, report_fit
 import numpy as np
+import matplotlib.pyplot as plt
 import os
 import csv
 import math
