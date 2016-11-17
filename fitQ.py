@@ -43,11 +43,11 @@ def exponential(params, tlist, glist):
 	model = np.array(calcExp(alpha, N, nsteps))
 	data = np.array(glist)
 	try:
-        return model-data
-    except:
-        print model
-        print data
-        return
+		return model - data
+	except:
+		print model
+		print data
+		return
 
 def calcPL(beta, N, nsteps):
 	model = list()
@@ -62,11 +62,11 @@ def powerlaw(params, tlist, glist):
 	model = np.array(calcPL(beta, N, nsteps))
 	data = np.array(glist)
 	try:
-        return model-data
-    except:
-        print model
-        print data
-        return
+		return model - data
+	except:
+		print model
+		print data
+		return
 
 def drawPic(tlist, glist, result, path, flag):
 	nsteps = max(tlist) + 1
