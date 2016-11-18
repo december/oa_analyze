@@ -28,7 +28,7 @@ def isCoupon(golist):
 	m = max(golist)
 	for i in range(n):
 		if golist[i] == m:
-			return min(i - 1, 0)
+			return max(i - 1, 0)
 	return 0
 
 def calcExp(alpha, N, nsteps):
