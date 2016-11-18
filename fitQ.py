@@ -88,6 +88,7 @@ def drawPic(tlist, glist, result, path, flag):
 	plt.plot(t, g, 'r+')
 	plt.plot(t, m, 'k')
 	plt.savefig(path)
+	plt.cla()
 
 fw1 = open('../params_exp.csv', 'w')
 fw2 = open('../params_pl.csv', 'w')
@@ -131,8 +132,10 @@ for item in namelist:
 	fw2.write('\n')
 	drawPic(tlist, glist, r2, '../fitpic_pl/'+name+'.png', 2)
 	count += 1
-	if count % 500 == 0:
+	if count % 100 == 0:
 		print count
+	if count >= 500:
+		break
 fw1.close()
 fw2.close()
 
