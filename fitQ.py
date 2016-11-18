@@ -121,21 +121,24 @@ for item in namelist:
 	params.add('N', value=int(singlefile[2][n-1]), min=0.0)
 	params.add('alpha', value=0.01, min=0.0)
 	params.add('beta', value=0.4, min=0.0)
-	r1 = minimize(exponential, params, args=(tlist, glist))
-	fw1.write(name+',')
-	fw1.write(str(r1.params))
-	fw1.write('\n')
-	drawPic(tlist, glist, r1, '../fitpic_exp/'+name+'.png', 1)
-	r2 = minimize(powerlaw, params, args=(tlist, glist))
-	fw2.write(name+',')
-	fw2.write(str(r2.params))
-	fw2.write('\n')
-	drawPic(tlist, glist, r2, '../fitpic_pl/'+name+'.png', 2)
-	count += 1
-	if count % 100 == 0:
-		print count
-	if count >= 500:
-		break
+	try:
+		r1 = minimize(exponential, params, args=(tlist, glist))
+		fw1.write(name+',')
+		fw1.write(str(r1.params))
+		fw1.write('\n')
+		drawPic(tlist, glist, r1, '../fitpic_exp/'+name+'.png', 1)
+		r2 = minimize(powerlaw, params, args=(tlist, glist))
+		fw2.write(name+',')
+		fw2.write(str(r2.params))
+		fw2.write('\n')
+		drawPic(tlist, glist, r2, '../fitpic_pl/'+name+'.png', 2)
+		count += 1
+		if count % 100 == 0:
+			print count
+		if count >= 500:
+			break
+	except:
+		print name
 fw1.close()
 fw2.close()
 
