@@ -1,3 +1,4 @@
+#-*- coding: utf-8 -*-
 from lmfit import minimize, Parameters, Parameter, report_fit
 import numpy as np
 import matplotlib.pyplot as plt
@@ -8,10 +9,12 @@ import math
 namelist = os.listdir('../doubleline_text/')
 rmse_exp = list()
 rmse_pl = list()
+namedic = {}
 
 def isCoupon(golist):
 	n = len(golist)
-	'''
+	if int(golist[n-1]) == 0:
+		return -1
 	if int(golist[0]) * 1.0 / int(golist[n-1]) > 0.05 and int(golist[0]) > 20:
 		return 0 
 	dlist = list()
@@ -20,9 +23,9 @@ def isCoupon(golist):
 		d = int(golist[i]) - int(golist[i-1])
 		dlist.append(d)
 	for i in range(1, n):
-		if d[i] > 4 * d[i-1] and d[i] > 20:
+		if dlist[i] > 4 * dlist[i-1] and dlist[i] > 20:
 			return i
-	return -1
+	return 0
 	'''
 	golist = [int(k) for k in golist]
 	m = max(golist)
@@ -30,6 +33,7 @@ def isCoupon(golist):
 		if golist[i] == m:
 			return max(i - 1, 0)
 	return 0
+	'''
 
 def calcExp(alpha, N, nsteps):
 	model = list()
@@ -69,9 +73,11 @@ def powerlaw(params, tlist, glist):
 		print data
 		return
 
-def drawPic(tlist, glist, result, path, flag):
+def drawPic(tlist, glist, res1, res2, path):
+	if max(glist) == 0:
+		return
 	nsteps = max(tlist) + 1
-	rmse = 0
+	'''
 	if flag == 1:
 		model = calcExp(result.params['alpha'].value, result.params['N'].value, nsteps)
 		for i in range(nsteps):
@@ -82,18 +88,53 @@ def drawPic(tlist, glist, result, path, flag):
 		for i in range(nsteps):
 			rmse += (glist[i] - model[i]) * (glist[i] - model[i])
 		rmse_pl.append(math.sqrt(rmse * 1.0 / nsteps))
-	m = np.array(model)
+	'''
+	rmse = 0
+	model1 = calcExp(res1.params['alpha'].value, res1.params['N'].value, nsteps)
+	for i in range(nsteps):
+		rmse += (glist[i] - model1[i]) * (glist[i] - model1[i])
+	r1 = math.sqrt(rmse * 1.0 / nsteps) / max(glist)
+	rmse_exp.append(r1)
+	rmse = 0
+	model2 = calcPL(res2.params['beta'].value, res2.params['N'].value, nsteps)
+	for i in range(nsteps):
+		rmse += (glist[i] - model2[i]) * (glist[i] - model2[i])
+	r2 = math.sqrt(rmse * 1.0 / nsteps) / max(glist)
+	rmse_pl.append(r2)
+
+	s1 = 'EX: N='+str(round(res1.params['N'].value, 1))+' A='+str(res1.params['alpha'].value)+' R='+str(r1)
+	s2 = 'PL: N='+str(round(res2.params['N'].value, 1))+' B='+str(res2.params['beta'].value)+' R='+str(r2)
+	m1 = np.array(model1)
+	m2 = np.array(model2)
 	g = np.array(glist)
 	t = np.array(tlist)
 	plt.plot(t, g, 'r+')
-	plt.plot(t, m, 'k')
+	plt.plot(t, m1, 'k', label=s1)
+	plt.plot(t, m2, 'g', label=s2)
+	plt.legend(loc='lower right')
+	leg = plt.gca().get_legend()
+	ltext  = leg.get_texts()
+	plt.setp(ltext, fontsize='small')
+	#plt.text(1, max(glist), 'N:   alpha:    RMSE:    (Exp)')
+	#plt.text(1, 0.9 * max(glist), 'N:   alpha:    RMSE:    (PL)')
 	plt.savefig(path)
 	plt.cla()
+
+csvfile = file('../oaInfo.csv')
+reader = csv.reader(csvfile)
+for line in reader:
+	if len(line[0]) == 8:
+		namedic[line[1]] = line[6]
+	else:
+		namedic[line[0]] = line[6]
+csvfile.close()
 
 fw1 = open('../params_exp.csv', 'w')
 fw2 = open('../params_pl.csv', 'w')
 count = 0
 for item in namelist:
+	if not item[-4:] == '.csv':
+		continue
 	name = item.split('_')[1]
 	singlefile = list()
 	csvfile = file('../doubleline_text/'+item)
@@ -113,31 +154,35 @@ for item in namelist:
 	for i in range(t, n):
 		tlist.append(i - t)
 		glist.append(int(singlefile[2][i]) - base)
-	if len(tlist) == 0:
+	if len(tlist) < 3:
 		continue
 	tlist = np.array(tlist)
 	glist = np.array(glist)
 	params = Parameters()
-	params.add('N', value=int(singlefile[2][n-1]), min=0.0)
+	#, max=max(int(singlefile[1][n-1]), int(singlefile[2][n-1]))-base
+	params.add('N', value=int(singlefile[2][n-1])-base, min=0.0)
 	params.add('alpha', value=0.01, min=0.0)
-	params.add('beta', value=0.4, min=0.0)
-	print len(tlist)
-	print len(glist)
+	params.add('beta', value=0.15, min=0.0)
+	#print len(tlist)
+	#print len(glist)
 	r1 = minimize(exponential, params, args=(tlist, glist))
 	fw1.write(name+',')
 	fw1.write(str(r1.params))
 	fw1.write('\n')
-	drawPic(tlist, glist, r1, '../fitpic_exp/'+name+'.png', 1)
+	#drawPic(tlist, glist, r1, '../fitpic_exp/'+name+'.png', 1)
 	r2 = minimize(powerlaw, params, args=(tlist, glist))
 	fw2.write(name+',')
 	fw2.write(str(r2.params))
 	fw2.write('\n')
-	drawPic(tlist, glist, r2, '../fitpic_pl/'+name+'.png', 2)
+	nickname = 'Unknown'
+	if namedic.has_key(name):
+		nickname = namedic[name]
+	drawPic(tlist, glist, r1, r2, '../fitpic_all/'+name+'_'+nickname+'.png')
 	count += 1
 	if count % 100 == 0:
 		print count
-	if count >= 500:
-		break
+	#if count >= 500:
+	#	break
 	#except:
 	#	print name
 fw1.close()
