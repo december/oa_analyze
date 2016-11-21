@@ -235,8 +235,13 @@ for key in holdtime:
 	for item in holdtime[key]:
 		y[int((math.log(item+1) - b) / d)] += 1
 	m = len(holdtime[key])
-	for i in range(binnum):
-		y[i] = y[i] * 1.0 / m
+	cnt = binnum - 1
+	while cnt >= 0:
+		if y[cnt] == 0:
+			y.pop(cnt)
+			x.pop(cnt)
+		else:
+			y[cnt] = y[cnt] * 1.0 / m
 	x = np.array(x)
 	y = np.array(y)
 	plt.plot(x, y, 'o')
