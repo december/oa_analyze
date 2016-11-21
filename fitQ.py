@@ -9,6 +9,7 @@ import math
 namelist = os.listdir('../doubleline_text/')
 rmse_exp = list()
 rmse_pl = list()
+nlist = list()
 namedic = {}
 
 def isCoupon(golist):
@@ -101,14 +102,15 @@ def drawPic(tlist, glist, blist, res1, res2, path):
 		rmse += (glist[i] - model2[i]) * (glist[i] - model2[i])
 	r2 = math.sqrt(rmse * 1.0 / nsteps) / max(glist)
 	rmse_pl.append(r2)
-
+	nlist.append(path.split('/')[2].split('_')[0])
 	s1 = 'EX: N='+str(round(res1.params['N'].value, 1))+' A='+str(res1.params['alpha'].value)+' R='+str(r1)
 	s2 = 'PL: N='+str(round(res2.params['N'].value, 1))+' B='+str(res2.params['beta'].value)+' R='+str(r2)
 	m1 = np.array(model1)
 	m2 = np.array(model2)
 	g = np.array(glist)
 	t = np.array(tlist)
-	if len(blist) == 0:
+	b = np.array(blist)
+	if not len(blist) == 0:
 		plt.plot(t, b, 'b+')
 	plt.plot(t, g, 'r+')
 	plt.plot(t, m1, 'k', label=s1)
@@ -202,7 +204,7 @@ pl_score = 0
 fw = open('../rmse_ExpPL.csv', 'w')
 n = len(rmse_exp)
 for i in range(n):
-	fw.write(namelist[i].split('_')[1])
+	fw.write(nlist[i])
 	fw.write(',')
 	fw.write(str(rmse_exp[i]))
 	fw.write(',')
