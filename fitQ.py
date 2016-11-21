@@ -25,7 +25,7 @@ def isCoupon(golist):
 	for i in range(1, n):
 		if dlist[i] > 4 * dlist[i-1] and dlist[i] > 20:
 			return i
-	return 0
+	return -1
 	'''
 	golist = [int(k) for k in golist]
 	m = max(golist)
@@ -73,7 +73,7 @@ def powerlaw(params, tlist, glist):
 		print data
 		return
 
-def drawPic(tlist, glist, res1, res2, path):
+def drawPic(tlist, glist, blist, res1, res2, path):
 	if max(glist) == 0:
 		return
 	nsteps = max(tlist) + 1
@@ -108,6 +108,8 @@ def drawPic(tlist, glist, res1, res2, path):
 	m2 = np.array(model2)
 	g = np.array(glist)
 	t = np.array(tlist)
+	if len(blist) == 0:
+		plt.plot(t, b, 'b+')
 	plt.plot(t, g, 'r+')
 	plt.plot(t, m1, 'k', label=s1)
 	plt.plot(t, m2, 'g', label=s2)
@@ -147,20 +149,25 @@ for item in namelist:
 		continue
 	tlist = list()
 	glist = list()
+	blist = list()
 	n = len(singlefile[2])
 	base = 0
+	baseb = 0
 	if t > 0:
-		base = int(singlefile[2][t])
+		base = int(singlefile[2][t-1])
+		baseb = int(singlefile[1][t-1])
 	for i in range(t, n):
 		tlist.append(i - t)
 		glist.append(int(singlefile[2][i]) - base)
+		blist.append(int(singlefile[1][i]) - baseb)
 	if len(tlist) < 3:
 		continue
 	tlist = np.array(tlist)
 	glist = np.array(glist)
+	blist = np.array(blist)
 	params = Parameters()
-	#, max=max(int(singlefile[1][n-1]), int(singlefile[2][n-1]))-base
-	params.add('N', value=int(singlefile[2][n-1])-base, min=0.0)
+	#
+	params.add('N', value=int(singlefile[2][n-1])-base, min=0.0, max=max(int(singlefile[1][n-1]) - baseb, int(singlefile[2][n-1]) - base))
 	params.add('alpha', value=0.01, min=0.0)
 	params.add('beta', value=0.15, min=0.0)
 	#print len(tlist)
@@ -177,7 +184,8 @@ for item in namelist:
 	nickname = 'Unknown'
 	if namedic.has_key(name):
 		nickname = namedic[name]
-	drawPic(tlist, glist, r1, r2, '../fitpic_all/'+name+'_'+nickname+'.png')
+	#blist = list()
+	drawPic(tlist, glist, blist, r1, r2, '../fitpic_max/'+name+'_'+nickname+'.png')
 	count += 1
 	if count % 100 == 0:
 		print count

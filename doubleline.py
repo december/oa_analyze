@@ -242,6 +242,7 @@ for key in holdtime:
 			x.pop(cnt)
 		else:
 			y[cnt] = y[cnt] * 1.0 / m
+		cnt -= 1
 	x = np.array(x)
 	y = np.array(y)
 	plt.plot(x, y, 'o')
