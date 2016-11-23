@@ -4,7 +4,15 @@ import csv
 import datetime
 import time
 
-def isGood(c, g):
+earliest = '1435680000'
+
+def isGood(c, g, t):
+	'''
+	if t == '20150701':
+		return False
+	'''
+	if t < earliest:
+		return False
 	if len(c) <= 10:
 		return False
 	if max(c) <= 100 and max(g) <= 100:
@@ -65,6 +73,13 @@ begin = 0
 initsize = len(initiallist)
 '''
 
+csvfile = file('../oaInfo.csv', 'r')
+reader = csv.reader(csvfile)
+setdic = {}
+for line in reader:
+	setdic[line[0]] = line[11]
+noidlist = list()
+
 for line in data:
 	if line[0][0] != '2':
 		print line[0][0]
@@ -73,14 +88,15 @@ for line in data:
 		if not first:
 			tempcome.append(come)
 			tempgo.append(go)
-			if isGood(tempcome, tempgo):
-				namelist.append(lastid)
-				comelist.append(tempcome)
-				golist.append(tempgo)
-				timelist.append(temptime)
-				timestring.append(time+'-'+lasttime)
-			else:
-				bad += 1
+			if setdic.has_key(lastid):
+				if isGood(tempcome, tempgo, setdic[lastid]):
+					namelist.append(lastid)
+					comelist.append(tempcome)
+					golist.append(tempgo)
+					timelist.append(temptime)
+					timestring.append(time+'-'+lasttime)
+				else:
+					bad += 1
 		else:
 			first = False
 		lastid = line[4]

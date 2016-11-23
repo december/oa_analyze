@@ -60,6 +60,7 @@ print b
 print e
 print bins
 pl.hist(np.array(alist), bins)
+pl.xscale('log')
 pl.savefig('alpha.png')
 pl.cla()
 
@@ -67,6 +68,7 @@ b = min(blist)
 e = max(blist)
 bins = np.linspace(b, e, binnum)
 pl.hist(np.array(blist), bins)
+pl.xscale('log')
 pl.savefig('beta.png')
 pl.cla()
 
