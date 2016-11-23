@@ -26,7 +26,7 @@ def isCoupon(golist):
 	for i in range(1, n):
 		if dlist[i] > 4 * dlist[i-1] and dlist[i] > 20:
 			return i
-	return -1
+	return 0
 	'''
 	golist = [int(k) for k in golist]
 	m = max(golist)
@@ -74,7 +74,7 @@ def powerlaw(params, tlist, glist):
 		print data
 		return
 
-def drawPic(tlist, glist, blist, res1, res2, path):
+def drawPic(tlist, glist, blist, res1, res2, path, base):
 	if max(glist) == 0:
 		return
 	nsteps = max(tlist) + 1
@@ -105,6 +105,11 @@ def drawPic(tlist, glist, blist, res1, res2, path):
 	nlist.append(path.split('/')[2].split('_')[0])
 	s1 = 'EX: N='+str(round(res1.params['N'].value, 1))+' A='+str(res1.params['alpha'].value)+' R='+str(r1)
 	s2 = 'PL: N='+str(round(res2.params['N'].value, 1))+' B='+str(res2.params['beta'].value)+' R='+str(r2)
+	m = len(model1)
+	for i in range(m):
+		model1[i] += base
+		model2[i] += base
+		glist[i] += base
 	m1 = np.array(model1)
 	m2 = np.array(model2)
 	g = np.array(glist)
@@ -161,7 +166,7 @@ for item in namelist:
 	for i in range(t, n):
 		tlist.append(i - t)
 		glist.append(int(singlefile[2][i]) - base)
-		blist.append(int(singlefile[1][i]) - baseb)
+		blist.append(int(singlefile[1][i]))
 	if len(tlist) < 3:
 		continue
 	tlist = np.array(tlist)
@@ -187,7 +192,7 @@ for item in namelist:
 	if namedic.has_key(name):
 		nickname = namedic[name]
 	#blist = list()
-	drawPic(tlist, glist, blist, r1, r2, '../fitpic_max/'+name+'_'+nickname+'.png')
+	drawPic(tlist, glist, blist, r1, r2, '../fitpic_all_max/'+name+'_'+nickname+'.png', base)
 	count += 1
 	if count % 100 == 0:
 		print count
