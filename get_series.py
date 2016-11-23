@@ -39,7 +39,7 @@ for line in data:
 	if line[0][0] != '2':
 		print line[0][0]
 		continue
-	line = line.split(' ')
+	line = line[0].split(' ')
 	if line[4] != lastid:
 		if not first:
 			single.close()
