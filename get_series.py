@@ -46,7 +46,7 @@ for line in data:
 			first = False
 		if not line[4] in idset:
 			continue
-		single = open('../timeseries/'+line[4]+'.csv')
+		single = open('../timeseries/'+line[4]+'.csv', 'w')
 		single.write(makeString(line))
 		lastid == line[4]
 	else:
