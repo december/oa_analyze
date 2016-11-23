@@ -10,7 +10,7 @@ def makeString(line):
 	return s
 
 idlist = list()
-namelist = os.listdir('../doubleline_text)/')
+namelist = os.listdir('../doubleline_text/')
 for item in namelist:
 	idlist.append(item.split('_')[1])
 idset = set(idlist)
