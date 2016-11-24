@@ -43,11 +43,12 @@ for line in data:
 		continue
 	line = line[0].split(' ')
 	if line[4] != lastid:
-		if not first:
-			single.close()
-			first = False
 		if not line[4] in idset:
 			continue
+		if not first:
+			single.close()
+		else:
+			first = False
 		single = open('../timeseries/'+line[4]+'.csv', 'w')
 		single.write(makeString(line))
 		lastid == line[4]
