@@ -35,7 +35,9 @@ initsize = len(initiallist)
 
 first = True
 lastid = -1
+cnt = 0
 for line in data:
+	cnt += 1
 	if line[0][0] != '2':
 		print line[0][0]
 		continue
@@ -53,4 +55,6 @@ for line in data:
 		if not line[4] in idset:
 			continue
 		single.write(makeString(line))
+	if cnt % 10000 == 0:
+		print cnt
 single.close()
