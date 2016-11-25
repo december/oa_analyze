@@ -277,11 +277,11 @@ for i in range(n):
 	plt.plot(z, y, 'r')
 	if flag:
 		plt.plot(z, c, 'k')
-	plt.yscale('log')
+	#plt.yscale('log')
 	plt.title(unicode(timestring[i], 'utf-8'))
 	plt.xlabel(u'Time')
 	plt.ylabel(u'Number')
-	plt.savefig('../tripleline_log/'+str(i)+'_'+namelist[i]+'.png')
+	plt.savefig('../tripleline_new/'+str(i)+'_'+namelist[i]+'.png')
 	plt.cla()
 	
 	z1 = timelist[i]
@@ -309,7 +309,7 @@ for i in range(n):
 		continue
 	plt.plot(z1, dx, 'b')
 	plt.plot(z2, dy, 'r')
-	plt.yscale('log')
+	#plt.yscale('log')
 	plt.title(unicode(timestring[i], 'utf-8'))
 	plt.xlabel(u'Time')
 	plt.ylabel(u'Delta')
